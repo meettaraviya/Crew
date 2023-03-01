@@ -1,6 +1,21 @@
-#include <iostream>
-using namespace std;
+#include "common.h"
+#include "card.cpp"
 
-void salute(){
-    cout << "Hello from game.cpp!!" << endl;
+class Game
+{
+private:
+    /* data */
+public:
+    int numPlayers;
+    Card* card;
+    Game(int=5);
+    ~Game();
+};
+
+Game::Game(int n): numPlayers(n)
+{
+}
+
+Game::~Game()
+{
 }
