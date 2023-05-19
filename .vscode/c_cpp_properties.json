@@ -1,20 +1,24 @@
 {
     "configurations": [
         {
-            "name": "Linux",
+            "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/include"
+                "/usr/include/x86_64-linux-gnu/c++/11"
             ],
-            "defines": [],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
             "compilerPath": "/usr/bin/gcc",
-            "cStandard": "c17",
-            "cppStandard": "gnu++17",
-            "intelliSenseMode": "linux-gcc-x64",
+            "cStandard": "c11",
+            "cppStandard": "gnu++14",
+            "intelliSenseMode": "clang-x86",
             "configurationProvider": "ms-vscode.makefile-tools"
         },
         {
-            "name": "make debug",
+            "name": "default",
             "includePath": [
                 "${workspaceFolder}/**"
             ],

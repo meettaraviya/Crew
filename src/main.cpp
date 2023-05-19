@@ -5,6 +5,6 @@ using namespace std;
 
 int main()
 {
-   Game game;
-   cout << "Crew with " << game.card << " players!!" << endl;
+   SequentialSelectionGame game;
+   cout << "Crew with " << N << " players!!!" << endl;
 }
