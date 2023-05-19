@@ -24,7 +24,7 @@ CC := g++
 CXX := g++
 
 all: $(OBJECTS)
-	$(CC) $(CCFLAGS) $(INCLUDE) obj/$(TARGET).o -o bin/$(TARGET) $(LIBPATH) $(LIBS)
+	$(CC) $(CCFLAGS) -o bin/$(TARGET) $(OBJECTS) $(LIBPATH) $(LIBS)
 
 obj/%.o: src/%.cpp
 	$(CXX) $(CXXFLAGS) $(INCLUDE) -c $< -o $@

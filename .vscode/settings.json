@@ -1,6 +1,24 @@
 {
     "files.associations": {
         "iostream": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "bit": "cpp",
+        "array": "cpp",
+        "atomic": "cpp",
+        "bitset": "cpp",
+        "cwchar": "cpp",
+        "string": "cpp",
+        "vector": "cpp",
+        "exception": "cpp",
+        "functional": "cpp",
+        "random": "cpp",
+        "initializer_list": "cpp",
+        "iosfwd": "cpp",
+        "istream": "cpp",
+        "new": "cpp",
+        "streambuf": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp",
+        "utility": "cpp"
     }
 }

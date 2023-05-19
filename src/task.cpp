@@ -1,74 +1,29 @@
-#include "common.h"
-#include "game.cpp"
 #pragma once
+#include "common.h"
+#include "game.hpp"
+#include "task.hpp"
+#include "player.hpp"
 
-// enum class TaskStatus {FAIL = 0, PENDING = 1, SUCCESS = 2};
+Task::Task(){};
 
-class Task
-{
-private:
-    static int current_id;
-public:
-    int id = -1;
-    int difficulty = 0;
-    int owner = -1;
-    // TaskStatus status;
-    Task(){};
-    // Task(int diff, TaskStatus s): status(s), difficulty(diff){
-    Task(int diff): difficulty(diff){
-        id = current_id;
-        current_id++;
-    };
-    ~Task(){};
-    virtual bool is_successful(Game* g) = 0;
+Task::Task(int diff): difficulty(diff){
+    id = current_id;
+    current_id++;
 };
+
+Task::~Task(){};
 
 int Task::current_id = 0;
 
-class WonCardSetTask: public Task
-{
-public:
-    CardSet target_cards = 0LL, won_cards = 0LL;
-    int min_count = 0, max_count = 0;
-    
-    WonCardSetTask(int diff, CardSet s, int m, int M): Task{diff}, min_count(m), max_count(M){
-        // if(m==0) status = TaskStatus::SUCCESS;
-    }
+WonCardSetTask::WonCardSetTask(int diff, CardSet s, int m, int M): Task{diff}, min_count(m), max_count(M), target_cards(s){}
 
-    // void add(CardSet c){
-    //     won_cards |= c;
-    //     update_status();
-    // }
+bool WonCardSetTask::is_successful(Game* g){
+    int cnt = __popcount(g->players[owner]->won_cards & target_cards);
+    // cout << min_count << ' ' << cnt << ' ' << max_count << ' ' << target_cards << endl;
+    return (cnt>=min_count and cnt<=max_count);
+}
 
-    // void update_status(){
-    //     int cnt = __popcount(won_cards & target_cards);
-    //     if(cnt>=min_count and cnt<=max_count) status = TaskStatus::SUCCESS;
-    //     else status = TaskStatus::FAIL;
-    // }
-
-    bool is_successful(Game* g){
-        int cnt = __popcount(g->players[owner]->won_cards & target_cards);
-        return (cnt>=min_count and cnt<=max_count);
-    }
-};
-
-// class ComplexWonCardSetTask: public Task
-// {
-// public:
-//     vector <WonCardSetTask> subtasks;
-    
-//     ComplexWonCardSetTask(int diff, vector<WonCardSetTask> sts): Task{diff, TaskStatus::PENDING}, subtasks(sts){}
-
-//     void add(CardSet c){
-//         for(auto st: subtasks) st.add(c);
-//     }
-
-//     void update_status(){
-//         for(auto st: subtasks) st.update_status();
-//     }
-// };
-
-inline auto WON_CARD_SET_TASK(auto a, auto b, auto c, auto d){ return shared_ptr<Task>(new WonCardSetTask(a,b,c,d));}
+inline shared_ptr<Task> WON_CARD_SET_TASK(auto a, auto b, auto c, auto d){ return shared_ptr<Task>(new WonCardSetTask(a,b,c,d));}
 
 const shared_ptr<Task> all_tasks[] = {
     WON_CARD_SET_TASK(
@@ -268,3 +223,5 @@ const shared_ptr<Task> all_tasks[] = {
     ),
 
 };
+
+const int K = sizeof(all_tasks) / sizeof(all_tasks[0]);
