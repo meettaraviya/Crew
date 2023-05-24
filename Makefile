@@ -14,7 +14,7 @@ OBJECTS := $(patsubst src%,obj%, $(patsubst %.c,%.o, $(patsubst %.cpp,%.o,$(SOUR
 INCLUDE := -I.
 LIBPATH :=
 LIBS :=
-VARS := -DN=5
+VARS := -DN=5 -DDBG
 
 FLAGS := -Wall -std=c++20 -w
 CCFLAGS := $(FLAGS) $(VARS)

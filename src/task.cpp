@@ -3,6 +3,8 @@
 #include "game.hpp"
 #include "task.hpp"
 #include "player.hpp"
+#include "utils.hpp"
+#include "termio.hpp"
 
 Task::Task(){};
 
@@ -21,6 +23,10 @@ bool WonCardSetTask::is_successful(Game* g){
     int cnt = __popcount(g->players[owner]->won_cards & target_cards);
     // cout << min_count << ' ' << cnt << ' ' << max_count << ' ' << target_cards << endl;
     return (cnt>=min_count and cnt<=max_count);
+}
+
+void const WonCardSetTask::print(){
+    cout << "Target: " << as_vector(target_cards) << ", Range: [" << min_count << "," << max_count << "]";
 }
 
 inline shared_ptr<Task> WON_CARD_SET_TASK(auto a, auto b, auto c, auto d){ return shared_ptr<Task>(new WonCardSetTask(a,b,c,d));}

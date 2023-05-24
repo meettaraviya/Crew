@@ -1,3 +1,4 @@
+#pragma once
 #include "common.h"
 
 enum class Suit {PINK = 10, YELLOW = 11, GREEN = 12, BLUE = 13, BLACK = 14};

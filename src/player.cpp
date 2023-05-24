@@ -3,7 +3,6 @@
 #include "task.hpp"
 #include "player.hpp"
 
-
 Player::Player(Game* g, int ix=-1): index(ix), game(g) {}
 
 Player::~Player(){}
@@ -26,6 +25,7 @@ Card RandomPlayer::play_card(Trick t){
     while(n>0){
         n--; choices &= (choices-1);
     }
-    return Card(choices & (~choices + 1));
-
+    Card out(choices & (~choices + 1));
+    hand ^= out.singular;
+    return out;
 }

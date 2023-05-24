@@ -1,4 +1,6 @@
 #include "game.hpp"
+#include "utils.hpp"
+#include "termio.hpp"
 #include "task.hpp"
 #include "player.hpp"
 #include "card.hpp"
@@ -44,11 +46,21 @@ void SequentialSelectionGame::task_selection_phase(){
         players[i]->choose_task(tasks);
         left--; i=(i+1)%N;
     }
+    #ifdef DBG
+    for(int i=0; i<tasks.size(); i++){
+        cout << "Task[" << i << "]: <" << tasks[i] << ">," << endl;
+    }
+    cout << endl;
+    #endif
 }
 
 void SequentialSelectionGame::trick_phase(){
+    
     int leader = 0;
     while(!(players[leader]->hand & BLACK_FOUR)) leader++;
+    #ifdef DBG
+    for(int d=0; d<N; d++) cout << "Hand[" << d << "]: " << as_vector(players[d]->hand) << ", "; cout << endl;
+    #endif
     for(int i=0; i<T; i++){
         tricks[i] =  shared_ptr<Trick>(new Trick(leader, i));
         for(int j=0; j<N; j++){
@@ -59,6 +71,10 @@ void SequentialSelectionGame::trick_phase(){
         int winner = (leader + tricks[i]->relative_winner)%N;
         players[winner]->won_cards |= tricks[i]->card_set;
         leader = winner;
+        #ifdef DBG
+        cout << *tricks[i] << endl;
+        for(int d=0; d<N; d++) cout << "Hand[" << d << "]: " << as_vector(players[d]->hand) << ", "; cout << endl;
+        #endif
     }
 }
 bool SequentialSelectionGame::is_successful(){
