@@ -5,11 +5,7 @@
 #include "player.hpp"
 #include "card.hpp"
 
-Game::Game(){
-    for(int i=0; i<N; i++){
-        players[i] = shared_ptr<Player>(new RandomPlayer(this, i));
-    }
-}
+Game::Game(){}
 
 void SequentialSelectionGame::initialize_hands(){
     vector<int> card_ids(40);
@@ -37,8 +33,6 @@ SequentialSelectionGame::SequentialSelectionGame(int diff=5): Game(), difficulty
         }
         i++;
     }
-
-    initialize_hands();
 }
 void SequentialSelectionGame::task_selection_phase(){
     int left = tasks.size(), i = 0;
