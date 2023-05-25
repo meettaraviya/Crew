@@ -27,6 +27,6 @@ ostream& operator<<(ostream& x, const Trick &t){
 }
 
 ostream& operator<<(ostream& x, Task* task){
-    cout << "Owner: " << task->owner << ", Difficulty: " << task->difficulty << ", ";
+    cout << "Id: " << task->id << ", Owner: " << task->owner << ", Difficulty: " << task->difficulty << ", ";
     task->print();
 }

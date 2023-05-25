@@ -58,16 +58,20 @@ bool Card::operator>(const Card &other){
     else return (other.suit != Suit::BLACK) and (other.suit != suit or other.value <= value);
 }
 
+Trick::Trick(){}
+
 Trick::Trick(int l, int i): leader(l), index(i){}
 
 void Trick::add(Card card){
     cards.push_back(card);
     if(cards.size() == 1){
         relative_winner = 0;
+        winner = leader;
         lead_suit = card.suit;
     }
     else {
         relative_winner = cards[relative_winner] > card ? relative_winner : cards.size() - 1;
+        winner = (leader + relative_winner) % N;
     }
     card_set |= card.singular;
 }
@@ -75,6 +79,12 @@ void Trick::add(Card card){
 int Trick::count(Suit s){
     int c = 0;
     for(auto card: cards) if(card.suit==s) c++;
+    return c;
+}
+
+int Trick::even_count(){
+    int c = 0;
+    for(auto card: cards) if(card.value%2==0) c++;
     return c;
 }
 

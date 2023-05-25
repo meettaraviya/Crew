@@ -8,16 +8,16 @@ public:
     class Game* game;
     int index;
     Player(Game* g, int ix);
-    ~Player();
     virtual void choose_task(vector<shared_ptr<class Task>>&) = 0;
     virtual class Card play_card(class Trick t) = 0;
+    virtual void assign_tasks(vector<shared_ptr<class Task>>&) = 0;
 };
 
 class RandomPlayer: public Player
 {
 public:
     void choose_task(vector<shared_ptr<Task>>&);
+    void assign_tasks(vector<shared_ptr<class Task>>&);
     RandomPlayer(Game* g, int ix);
-    ~RandomPlayer();
     Card play_card(Trick t);
 };

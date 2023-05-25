@@ -7,20 +7,7 @@
 
 Game::Game(){}
 
-void SequentialSelectionGame::initialize_hands(){
-    vector<int> card_ids(40);
-    for(int i=0; i<40; i++) card_ids[i] = i;
-    random_shuffle(card_ids.begin(), card_ids.end());
-    int j = 0;
-    for(int i=0; i<N; i++){
-        for(; j<(i+1)*T; j++){
-            players[i]->hand |= (1LL<<card_ids[j]); 
-        }
-    }
-    if(j!=40) players[0]->hand |= (1LL<<card_ids[39]);
-}
-
-SequentialSelectionGame::SequentialSelectionGame(int diff=5): Game(), difficulty(diff){
+void Game::allot_tasks(int diff=1){
     vector<int> task_ids(K);
     for(int i=0; i<task_ids.size(); i++) task_ids[i] = i;
     random_shuffle(task_ids.begin(), task_ids.end());
@@ -34,6 +21,55 @@ SequentialSelectionGame::SequentialSelectionGame(int diff=5): Game(), difficulty
         i++;
     }
 }
+
+void Game::trick_phase(){
+    
+    int leader = captain;
+    #ifdef DBG
+    for(int d=0; d<N; d++) cout << "Hand[" << d << "]: " << as_vector(players[d]->hand) << ", "; cout << endl;
+    #endif
+    for(int i=0; i<T; i++){
+        tricks[i] =  shared_ptr<Trick>(new Trick(leader, i));
+        for(int j=0; j<N; j++){
+            int k = (j+leader)%N;
+            Card play = players[k]->play_card(*tricks[i]);
+            tricks[i]->add(play);
+        }
+        players[tricks[i]->winner]->won_cards |= tricks[i]->card_set;
+        trick_winners[i] = tricks[i]->winner;
+        leader = tricks[i]->winner;
+        #ifdef DBG
+        cout << *tricks[i] << endl;
+        for(int d=0; d<N; d++) cout << "Hand[" << d << "]: " << as_vector(players[d]->hand) << ", "; cout << endl;
+        #endif
+    }
+}
+
+bool Game::is_successful(){
+    for(auto t: tasks) if(!t->is_successful(this)) return false;
+    return true;
+}
+
+void Game::initialize_hands(){
+    vector<int> card_ids(40);
+    for(int i=0; i<40; i++) card_ids[i] = i;
+    random_shuffle(card_ids.begin(), card_ids.end());
+    int j = 0;
+    for(int i=0; i<N; i++){
+        for(; j<(i+1)*T; j++){
+            players[i]->hand |= (1LL<<card_ids[j]); 
+        }
+    }
+    if(j!=40) players[0]->hand |= (1LL<<card_ids[39]);
+
+    captain = 0;
+    while(!(players[captain]->hand & BLACK_FOUR)) captain++;
+}
+
+SequentialSelectionGame::SequentialSelectionGame(int diff=5): Game(), difficulty(diff){
+    allot_tasks(diff);
+}
+
 void SequentialSelectionGame::task_selection_phase(){
     int left = tasks.size(), i = 0;
     while(left>0){
@@ -48,31 +84,19 @@ void SequentialSelectionGame::task_selection_phase(){
     #endif
 }
 
-void SequentialSelectionGame::trick_phase(){
-    
-    int leader = 0;
-    while(!(players[leader]->hand & BLACK_FOUR)) leader++;
+FreeSelectionGame::FreeSelectionGame(int diff=5): Game(), difficulty(diff){
+    allot_tasks(diff);
+}
+
+void FreeSelectionGame::task_selection_phase(){
+    int captain;
+    while(!(players[captain]->hand&BLACK_FOUR)) captain++;
+    players[captain] -> assign_tasks(tasks);
     #ifdef DBG
-    for(int d=0; d<N; d++) cout << "Hand[" << d << "]: " << as_vector(players[d]->hand) << ", "; cout << endl;
-    #endif
-    for(int i=0; i<T; i++){
-        tricks[i] =  shared_ptr<Trick>(new Trick(leader, i));
-        for(int j=0; j<N; j++){
-            int k = (j+leader)%N;
-            Card play = players[k]->play_card(*tricks[i]);
-            tricks[i]->add(play);
-        }
-        int winner = (leader + tricks[i]->relative_winner)%N;
-        players[winner]->won_cards |= tricks[i]->card_set;
-        leader = winner;
-        #ifdef DBG
-        cout << *tricks[i] << endl;
-        for(int d=0; d<N; d++) cout << "Hand[" << d << "]: " << as_vector(players[d]->hand) << ", "; cout << endl;
-        #endif
+    for(int i=0; i<tasks.size(); i++){
+        cout << "Task[" << i << "]: <" << tasks[i] << ">," << endl;
     }
+    cout << endl;
+    #endif
 }
-bool SequentialSelectionGame::is_successful(){
-    for(auto t: tasks) if(!t->is_successful(this)) return false;
-    return true;
-}
-SequentialSelectionGame::~SequentialSelectionGame(){}
+

@@ -31,14 +31,16 @@ class Trick
 public:
     int leader = -1, index = -1;
     Suit lead_suit;
-    int relative_winner = -1;
+    int relative_winner = -1, winner = -1;
     vector<Card> cards;
     CardSet card_set = 0LL;
 
+    Trick();
     Trick(int l, int i);
     
     void add(Card card);
     int count(Suit s);
+    int even_count();
     int sum();
     Value max();
     Value min();

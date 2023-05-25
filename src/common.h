@@ -5,6 +5,7 @@
 #include <bit>
 #include <bitset>
 #include <memory>
+#include <functional>
 
 #ifndef N
 #define N 5
