@@ -17,10 +17,18 @@ const unsigned int AIPlayer1::task_net_layers[] = {
 
 };
 
+unsigned int AIPlayer1::q_cache_ix = 0;
+
+fann *AIPlayer1::q_net = NULL, *AIPlayer1::task_net = NULL;
+array<QNetInput, CACHE_SIZE> AIPlayer1::q_cache_in;
+array<QNetOutput, CACHE_SIZE> AIPlayer1::q_cache_out;
+
 AIPlayer1::AIPlayer1(Game* g, int ix): RandomPlayer(g, ix){
-    q_net = fann_create_standard_array(sizeof(q_net_layers)/sizeof(q_net_layers[0]), q_net_layers);
-    fann_set_activation_function_hidden(q_net, FANN_SIGMOID_SYMMETRIC);
-    fann_set_activation_function_output(q_net, FANN_LINEAR);
+    if(q_net==NULL){
+        q_net = fann_create_standard_array(sizeof(q_net_layers)/sizeof(q_net_layers[0]), q_net_layers);
+        fann_set_activation_function_hidden(q_net, FANN_ELLIOT_SYMMETRIC);
+        fann_set_activation_function_output(q_net, FANN_ELLIOT_SYMMETRIC);
+    }
 }
 
 void AIPlayer1::append_cardset_features(CardSet cs, int &ix){
@@ -54,9 +62,9 @@ Card AIPlayer1::play_card(Trick t){
     ix += 5;
 
     for(auto task: game->tasks){
-        q_cache_in[q_cache_ix][ix+(task->owner*K)+task->id] = 1.0;
+        q_cache_in[q_cache_ix][ix+(((task->owner+N-index)%N)*K)+task->id] = 1.0;
     }
-
+    
     copy(q_cache_out[q_cache_ix].begin(), q_cache_out[q_cache_ix].end(), fann_run(q_net, q_cache_in[q_cache_ix].data()));
 
     CardSet followingset =  get_card_set(t.lead_suit);
@@ -71,4 +79,13 @@ Card AIPlayer1::play_card(Trick t){
     q_cache_ix = (q_cache_ix+1)%CACHE_SIZE;
     hand ^= retval.singular;
     return retval;
+}
+
+void AIPlayer1::cleanup(){
+    int delta = game->is_successful()? +LR : -LR;
+    for(int i=q_cache_ix-40; i<q_cache_ix; i++){
+        fann_type *chosen = max_element(q_cache_out[i].data(), q_cache_out[i].data()+Q_NET_OUT);
+        fill(q_cache_out[i].data(), q_cache_out[i].data()+Q_NET_OUT, -delta);
+        *chosen = delta;
+    }
 }

@@ -11,6 +11,7 @@ public:
     virtual void choose_task(vector<shared_ptr<class Task>>&) = 0;
     virtual class Card play_card(class Trick t) = 0;
     virtual void assign_tasks(vector<shared_ptr<class Task>>&) = 0;
+    virtual void cleanup();
 };
 
 class RandomPlayer: public Player

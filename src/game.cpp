@@ -67,6 +67,7 @@ void Game::initialize_hands(){
 }
 
 void Game::cleanup(){
+    players[captain] -> cleanup();
     for(auto t: tasks) t->owner = -1;
 }
 
@@ -93,8 +94,6 @@ FreeSelectionGame::FreeSelectionGame(int diff=5): Game(), difficulty(diff){
 }
 
 void FreeSelectionGame::task_selection_phase(){
-    int captain;
-    while(!(players[captain]->hand&BLACK_FOUR)) captain++;
     players[captain] -> assign_tasks(tasks);
     #ifdef DBG
     for(int i=0; i<tasks.size(); i++){

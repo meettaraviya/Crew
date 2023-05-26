@@ -5,6 +5,8 @@
 
 Player::Player(Game* g, int ix=-1): index(ix), game(g) {}
 
+void Player::cleanup(){}
+
 void RandomPlayer::choose_task(vector<shared_ptr<Task>> &tasks){
     int i = 0;
     while (tasks[i]->owner>=0) i++;

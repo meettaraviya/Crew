@@ -13,6 +13,8 @@
 #define T (N==3?13:(N==4?10:8))
 #define DIFF(a,b,c) (N==3?a:(N==4?b:c))
 #define K 93
+#define N_GAMES 100
+
 
 typedef long long CardSet;
 
