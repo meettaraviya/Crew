@@ -609,5 +609,3 @@ const shared_ptr<Task> all_tasks[] = {
     ),
 
 };
-
-const int K = sizeof(all_tasks) / sizeof(all_tasks[0]);

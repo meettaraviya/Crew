@@ -78,4 +78,3 @@ public:
 };
 
 extern const shared_ptr<Task> all_tasks[];
-extern const int K;
