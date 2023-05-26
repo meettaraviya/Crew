@@ -10,7 +10,7 @@ Game::Game(){}
 void Game::allot_tasks(int diff=1){
     vector<int> task_ids(K);
     for(int i=0; i<task_ids.size(); i++) task_ids[i] = i;
-    random_shuffle(task_ids.begin(), task_ids.end());
+    // random_shuffle(task_ids.begin(), task_ids.end());
 
     int total_diff = 0, i = 0;
     while(total_diff<diff){
@@ -64,6 +64,10 @@ void Game::initialize_hands(){
 
     captain = 0;
     while(!(players[captain]->hand & BLACK_FOUR)) captain++;
+}
+
+void Game::cleanup(){
+    for(auto t: tasks) t->owner = -1;
 }
 
 SequentialSelectionGame::SequentialSelectionGame(int diff=5): Game(), difficulty(diff){

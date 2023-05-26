@@ -49,7 +49,8 @@ Card AIPlayer1::play_card(Trick t){
     cards_out ^= t.card_set;
     append_cardset_features(cards_out, ix);
     append_cardset_features(t.card_set, ix);
-    q_cache_in[q_cache_ix][ix+((int) t.lead_suit - (int) Suit::PINK)] = 1.0;
+    if(t.card_set)
+        q_cache_in[q_cache_ix][ix+((int) t.lead_suit - (int) Suit::PINK)] = 1.0;
     ix += 5;
 
     for(auto task: game->tasks){

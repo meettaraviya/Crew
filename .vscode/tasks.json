@@ -6,23 +6,6 @@
             "label": "C/C++: g++.exe build active file",
             "command": "/usr/bin/make",
             "args": [
-                // "-g",
-                // "-std=c++17",
-                // // "-I${workspaceFolder}/include",
-                // // "-I/usr/include/x86_64-linux-gnu/c++/11",
-                // // "-L${workspaceFolder}/lib",
-                // "${workspaceFolder}/src/main.cpp",
-                // "${workspaceFolder}/src/*.cpp",
-                // // "${workspaceFolder}/src/glad.c",
-                // // "-lglfw3",
-                // // "-ldl",
-                // // "-lm",
-                // // "-lglut",
-                // // "-lGLU",
-                // // "-lGL",
-                // // "-lX11",
-                // "-o",
-                // "${workspaceFolder}/${workspaceFolderBasename}"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
@@ -37,26 +20,9 @@
             "label": "C/C++: g++ build active file",
             "command": "/usr/bin/make",
             "args": [
-                // "-g",
-                // "-std=c++17",
-                // // "-I${workspaceFolder}/include",
-                // // "-I/usr/include/x86_64-linux-gnu/c++/11",
-                // // "-L${workspaceFolder}/lib",
-                // "${workspaceFolder}/src/main.cpp",
-                // "${workspaceFolder}/src/*.cpp",
-                // // "${workspaceFolder}/src/glad.c",
-                // // "-lglfw3",
-                // // "-ldl",
-                // // "-lm",
-                // // "-lglut",
-                // // "-lGLU",
-                // // "-lGL",
-                // // "-lX11",
-                // "-o",
-                // "${workspaceFolder}/${workspaceFolderBasename}"
             ],
             "options": {
-                "cwd": "${fileDirname}"
+                "cwd": "${workspaceFolder}"
             },
             "problemMatcher": [
                 "$gcc"

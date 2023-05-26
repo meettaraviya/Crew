@@ -47,36 +47,21 @@ inline shared_ptr<Task> NOT_OPEN_TRICK_TASK(auto a, auto b){ return shared_ptr<T
 
 // WonCardSetConditionTask
 
-#ifdef DBG
 WonCardSetConditionTask::WonCardSetConditionTask(int diff, function<bool (CardSet)> wcc, string d): Task{diff}, won_cardset_condition(wcc), description(d){}
-#else
-WonCardSetConditionTask::WonCardSetConditionTask(int diff, function<bool (CardSet)> wcc): Task{diff}, won_cardset_condition(wcc){}
-#endif
 
 bool WonCardSetConditionTask::is_successful(Game* g){
     return won_cardset_condition(g->players[owner]->won_cards);
 }
 
 void const WonCardSetConditionTask::print(){
-    #ifdef DBG
     cout << "Goal: " << description;
-    #endif
 }
 
-#ifdef DBG
 inline shared_ptr<Task> WON_CARD_SET_CONDITION_TASK(auto a, auto b, string c){ return shared_ptr<Task>(new WonCardSetConditionTask(a,b,c));}
-#else
-inline shared_ptr<Task> WON_CARD_SET_CONDITION_TASK(auto a, auto b, string c){ return shared_ptr<Task>(new WonCardSetConditionTask(a,b));}
-#endif
-
 
 // TrickConditionTask
 
-#ifdef DBG
 TrickConditionTask::TrickConditionTask(int diff, function<bool (Trick)> tc, string d): Task{diff}, trick_condition(tc), description(d){}
-#else
-TrickConditionTask::TrickConditionTask(int diff, function<bool (Trick)> tc): Task{diff}, trick_condition(tc){}
-#endif
 
 bool TrickConditionTask::is_successful(Game* g){
     for(auto t: g->tricks){
@@ -86,40 +71,24 @@ bool TrickConditionTask::is_successful(Game* g){
 }
 
 void const TrickConditionTask::print(){
-    #ifdef DBG
     cout << "Goal: " << description;
-    #endif
 }
 
-#ifdef DBG
 inline shared_ptr<Task> TRICK_CONDITION_TASK(auto a, auto b, string c){ return shared_ptr<Task>(new TrickConditionTask(a,b,c));}
-#else
-inline shared_ptr<Task> TRICK_CONDITION_TASK(auto a, auto b, string c){ return shared_ptr<Task>(new TrickConditionTask(a,b));}
-#endif
 
 // TrickWinnerConfigConditionTask
 
-#ifdef DBG
 TrickWinnerConfigConditionTask::TrickWinnerConfigConditionTask(int diff, function <bool(int[T], int, int)> twcc, string d): Task{diff}, trick_winner_config_condition(twcc), description(d){}
-#else
-TrickWinnerConfigConditionTask::TrickWinnerConfigConditionTask(int diff, function <bool(int[T], int, int)> twcc): Task{diff}, trick_winner_config_condition(twcc){}
-#endif
 
 bool TrickWinnerConfigConditionTask::is_successful(Game* g){
     return trick_winner_config_condition(g->trick_winners, owner, g->captain);
 }
 
 void const TrickWinnerConfigConditionTask::print(){
-    #ifdef DBG
     cout << "Goal: " << description;
-    #endif
 }
 
-#ifdef DBG
 inline shared_ptr<Task> TRICK_WINNER_CONFIG_CONDITION_TASK(auto a, auto b, string c){ return shared_ptr<Task>(new TrickWinnerConfigConditionTask(a,b,c));}
-#else
-inline shared_ptr<Task> TRICK_WINNER_CONFIG_CONDITION_TASK(auto a, auto b, string c){ return shared_ptr<Task>(new TrickWinnerConfigConditionTask(a,b));}
-#endif
 
 // all_tasks
 

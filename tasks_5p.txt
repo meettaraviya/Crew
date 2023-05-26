@@ -1,0 +1,93 @@
+Id: 0, Difficulty: 3, Target: B9B8B7B6B5B4B3B2B1P9P8P7P6P5P4P3P2P1, Range: [0,0]
+Id: 1, Difficulty: 3, Target: B9G9Y9P9, Range: [2,2]
+Id: 2, Difficulty: 1, Target: Y1, Range: [1,1]
+Id: 3, Difficulty: 3, Target: Y8P9, Range: [2,2]
+Id: 4, Difficulty: 3, Target: B3B2B1, Range: [3,3]
+Id: 5, Difficulty: 3, Target: K4K3K2K1, Range: [1,1]
+Id: 6, Difficulty: 4, Target: B6G6Y6P6, Range: [3,3]
+Id: 7, Difficulty: 4, Target: G9G8G7G6G5G4G3G2G1, Range: [2,2]
+Id: 8, Difficulty: 5, Target: B5G5Y5P5, Range: [3,4]
+Id: 9, Difficulty: 6, Target: B9G9Y9P9, Range: [4,4]
+Id: 10, Difficulty: 3, Target: Y6P5, Range: [2,2]
+Id: 11, Difficulty: 3, Target: Y9Y8Y7Y6Y5Y4Y3Y2Y1, Range: [7,9]
+Id: 12, Difficulty: 1, Target: K3, Range: [1,1]
+Id: 13, Difficulty: 3, Target: B8G5, Range: [2,2]
+Id: 14, Difficulty: 4, Target: G3Y5Y4, Range: [3,3]
+Id: 15, Difficulty: 2, Target: G7P1, Range: [2,2]
+Id: 16, Difficulty: 3, Target: B5P8, Range: [2,2]
+Id: 17, Difficulty: 1, Target: B4, Range: [1,1]
+Id: 18, Difficulty: 2, Target: B1G1Y1P1, Range: [0,0]
+Id: 19, Difficulty: 2, Target: Y9Y8Y7Y6Y5Y4Y3Y2Y1, Range: [0,0]
+Id: 20, Difficulty: 2, Target: B5G5Y5P5, Range: [0,0]
+Id: 21, Difficulty: 1, Target: K4K3K2K1, Range: [0,0]
+Id: 22, Difficulty: 3, Target: G9G8G7G6G5G4G3G2G1Y9Y8Y7Y6Y5Y4Y3Y2Y1, Range: [0,0]
+Id: 23, Difficulty: 1, Target: B9G9Y9P9, Range: [0,0]
+Id: 24, Difficulty: 1, Target: P3, Range: [1,1]
+Id: 25, Difficulty: 5, Target: B3G3Y3P3, Range: [4,4]
+Id: 26, Difficulty: 3, Target: B6Y7, Range: [2,2]
+Id: 27, Difficulty: 3, Target: B7Y9, Range: [2,2]
+Id: 28, Difficulty: 3, Target: B3B2B1G3G2G1Y3Y2Y1P3P2P1, Range: [0,0]
+Id: 29, Difficulty: 2, Target: B9B8G9G8Y9Y8P9P8, Range: [0,0]
+Id: 30, Difficulty: 3, Target: P9P8P7P6P5P4P3P2P1, Range: [5,9]
+Id: 31, Difficulty: 5, Target: B9G9Y9P9, Range: [3,4]
+Id: 32, Difficulty: 2, Target: G9G8G7G6G5G4G3G2G1, Range: [0,0]
+Id: 33, Difficulty: 4, Target: K4K3K2K1, Range: [3,4]
+Id: 34, Difficulty: 4, Target: B9B8B7B6B5B4B3B2B1, Range: [2,2]
+Id: 35, Difficulty: 1, Target: G6, Range: [1,1]
+Id: 36, Difficulty: 2, Target: B7G7Y7P7, Range: [2,4]
+Id: 37, Difficulty: 4, Target: K4K3K2K1, Range: [2,2]
+Id: 38, Difficulty: 4, Target: P9P8P7P6P5P4P3P2P1, Range: [1,1]
+Id: 39, Difficulty: 5, Goal: Win G2 in final trick
+Id: 40, Difficulty: 5, Goal: Win using C3
+Id: 41, Difficulty: 5, Goal: Win using C2
+Id: 42, Difficulty: 3, Goal: Win using C6
+Id: 43, Difficulty: 4, Goal: Win using C5
+Id: 44, Difficulty: 2, Goal: Win C5 using C7
+Id: 45, Difficulty: 5, Goal: Win C8 using C4
+Id: 46, Difficulty: 4, Goal: Win trick with total>31 (no K)
+Id: 47, Difficulty: 4, Goal: Win trick with total<16 (no K)
+Id: 48, Difficulty: 4, Goal: Win trick with total=22 or total=23 (no K)
+Id: 49, Difficulty: 5, Goal: Win trick with only odds (no K)
+Id: 50, Difficulty: 6, Goal: Win trick with only evens (no K)
+Id: 51, Difficulty: 4, Goal: Win trick with min>5
+Id: 52, Difficulty: 3, Goal: Win trick with max<5 (no K)
+Id: 53, Difficulty: 4, Goal: Win C6 using another C6
+Id: 54, Difficulty: 3, Goal: Win P7 using K
+Id: 55, Difficulty: 3, Goal: Win G9 using K
+Id: 56, Difficulty: 3, Goal: Win trick with #P=#B>0
+Id: 57, Difficulty: 3, Goal: Win trick with #G=#Y>0
+Id: 58, Difficulty: 5, Goal: Win all Cn for some C
+Id: 59, Difficulty: 4, Goal: Win #P=#Y>0
+Id: 60, Difficulty: 1, Goal: Win #P>#G
+Id: 61, Difficulty: 1, Goal: Win #Y>#B
+Id: 62, Difficulty: 4, Goal: Win #P>0 & #G>0 & #B>0 & #Y>0
+Id: 63, Difficulty: 4, Goal: Win #P=1 & #G=1
+Id: 64, Difficulty: 3, Goal: Win K2 and no other K
+Id: 65, Difficulty: 3, Goal: Win K1 and no other K
+Id: 66, Difficulty: 1, DontOpenWith: G9G8G7G6G5G4G3G2G1P9P8P7P6P5P4P3P2P1
+Id: 67, Difficulty: 3, DontOpenWith: B9B8B7B6B5B4B3B2B1Y9Y8Y7Y6Y5Y4Y3Y2Y1P9P8P7P6P5P4P3P2P1
+Id: 68, Difficulty: 4, Goal: Win first 3 tricks
+Id: 69, Difficulty: 4, Goal: Win first and last tricks
+Id: 70, Difficulty: 3, Goal: Win last trick
+Id: 71, Difficulty: 1, Goal: Win first trick
+Id: 72, Difficulty: 2, Goal: Win first 2 tricks
+Id: 73, Difficulty: 2, Goal: Win none of first 3 tricks
+Id: 74, Difficulty: 3, Goal: Win none of first 4 tricks
+Id: 75, Difficulty: 3, Goal: Win none of first 5 tricks
+Id: 76, Difficulty: 3, Goal: Win =0 tricks
+Id: 77, Difficulty: 4, Goal: Win only last trick
+Id: 78, Difficulty: 2, Goal: Win fewer tricks than @ (not @)
+Id: 79, Difficulty: 3, Goal: Win more tricks than @ (not @)
+Id: 80, Difficulty: 3, Goal: Win as many tricks as @ (not @)
+Id: 81, Difficulty: 4, Goal: Win 2 tricks in row
+Id: 82, Difficulty: 1, Goal: Win 3 tricks in row
+Id: 83, Difficulty: 2, Goal: Never win 2 tricks in row
+Id: 84, Difficulty: 3, Goal: Win =2 tricks and 2 tricks in row
+Id: 85, Difficulty: 4, Goal: Win =3 tricks and 3 tricks in row
+Id: 86, Difficulty: 2, Goal: Win =1 tricks
+Id: 87, Difficulty: 2, Goal: Win =2 tricks
+Id: 88, Difficulty: 5, Goal: Win =4 tricks
+Id: 89, Difficulty: 5, Goal: Win >T/2 tricks
+Id: 90, Difficulty: 3, Goal: Win fewer tricks than anyone
+Id: 91, Difficulty: 3, Goal: Win more tricks than anyone
+Id: 92, Difficulty: 3, Goal: Win only first trick

@@ -14,9 +14,9 @@ OBJECTS := $(patsubst src%,obj%, $(patsubst %.c,%.o, $(patsubst %.cpp,%.o,$(SOUR
 INCLUDE := -I. -I/usr/local/include
 LIBPATH :=
 LIBS := -lfann
-VARS := -DN=5 -DDBG
+VARS := -DN=5
 
-FLAGS := -Wall -std=c++20 -w
+FLAGS := -Wall -std=c++20 -w -g
 CCFLAGS := $(FLAGS) $(VARS)
 CXXFLAGS := $(FLAGS) $(VARS)
 
@@ -34,6 +34,3 @@ obj/%.o: src/%.cpp
 clean:
 	rm -rf obj/*
 	rm -f bin/*
-	
-help:
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'

@@ -14,6 +14,7 @@ public:
     bool is_successful();
     void allot_tasks(int);
     void initialize_hands();
+    void cleanup();
 };
 
 class SequentialSelectionGame: public Game
