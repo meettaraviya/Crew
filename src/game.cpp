@@ -35,6 +35,9 @@ void Game::trick_phase(){
             Card play = players[k]->play_card(*tricks[i]);
             tricks[i]->add(play);
         }
+        for(int j=0; j<N; j++){
+            players[j]-> hand &= (~(tricks[i]->card_set));
+        }
         players[tricks[i]->winner]->won_cards |= tricks[i]->card_set;
         trick_winners[i] = tricks[i]->winner;
         leader = tricks[i]->winner;
@@ -102,4 +105,3 @@ void FreeSelectionGame::task_selection_phase(){
     cout << endl;
     #endif
 }
-

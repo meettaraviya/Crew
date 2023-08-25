@@ -7,7 +7,6 @@
 
 const unsigned int AIPlayer1::q_net_layers[] = {
     Q_NET_IN,
-    256,
     128,
     64,
     Q_NET_OUT
@@ -33,15 +32,17 @@ AIPlayer1::AIPlayer1(Game* g, int ix): RandomPlayer(g, ix){
 
 void AIPlayer1::append_cardset_features(CardSet cs, int &ix){
     for(int j=0; j<40; j++){
-        q_cache_in[q_cache_ix][ix++] = float(cs&1);
-        cs >>= 1;
+        q_cache_in[q_cache_ix][ix++] = float((cs>>j)&1);
     }
+    int left = 40;
     while(cs){
         int n = __popcount(cs^(cs-1))-1;
         cs >>= (n+1);
         ix += n;
         q_cache_in[q_cache_ix][ix++] = 1.0;
+        left -= (n+1);
     }
+    ix+=left;
 }
 
 Card AIPlayer1::play_card(Trick t){
@@ -64,7 +65,7 @@ Card AIPlayer1::play_card(Trick t){
     for(auto task: game->tasks){
         q_cache_in[q_cache_ix][ix+(((task->owner+N-index)%N)*K)+task->id] = 1.0;
     }
-    
+
     copy(q_cache_out[q_cache_ix].begin(), q_cache_out[q_cache_ix].end(), fann_run(q_net, q_cache_in[q_cache_ix].data()));
 
     CardSet followingset =  get_card_set(t.lead_suit);
@@ -77,15 +78,16 @@ Card AIPlayer1::play_card(Trick t){
         return q_cache_out[q_cache_ix][__popcount(a.singular&(a.singular-1))] < q_cache_out[q_cache_ix][__popcount(b.singular&(b.singular-1))];
     });
     q_cache_ix = (q_cache_ix+1)%CACHE_SIZE;
-    hand ^= retval.singular;
     return retval;
 }
 
 void AIPlayer1::cleanup(){
-    int delta = game->is_successful()? +LR : -LR;
-    for(int i=q_cache_ix-40; i<q_cache_ix; i++){
+    int delta = game->is_successful()? +LR : 0.;
+    for(int i=q_cache_ix-40; i<q_cache_ix; i=(i+1)%CACHE_SIZE){
         fann_type *chosen = max_element(q_cache_out[i].data(), q_cache_out[i].data()+Q_NET_OUT);
-        fill(q_cache_out[i].data(), q_cache_out[i].data()+Q_NET_OUT, -delta);
-        *chosen = delta;
+        for(int j=0; j<Q_NET_OUT; j++){
+            q_cache_out[i][j] -= delta;
+        }
+        *chosen += 2*delta;
     }
 }

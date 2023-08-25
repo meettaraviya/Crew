@@ -10,8 +10,8 @@
     // + 5 // lead suit
     // + K*N // task owners
 #define Q_NET_OUT 40
-#define CACHE_SIZE 40*N_GAMES
-#define LR 1.
+#define CACHE_SIZE (40*N_GAMES)
+#define LR 0.5
 
 typedef array<fann_type, Q_NET_IN> QNetInput;
 typedef array<fann_type, Q_NET_OUT> QNetOutput;

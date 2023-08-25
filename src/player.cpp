@@ -30,6 +30,5 @@ Card RandomPlayer::play_card(Trick t){
         n--; choices &= (choices-1);
     }
     Card out(choices & (~choices + 1));
-    hand ^= out.singular;
     return out;
 }

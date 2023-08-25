@@ -27,8 +27,9 @@ int main()
          success_count += game.is_successful();
          game.cleanup();
       }
-      cout << "Gen " << j+1 << ": Won " << success_count << "/" << N_GAMES << " games!" << endl;   
+      cout << "Gen " << j+1 << ": Won " << success_count << "/" << N_GAMES << " games!" << endl;
       
+      fann_set_learning_rate(AIPlayer1::q_net, 0.01);
       fann_train_data *train_data = fann_create_train_array(CACHE_SIZE, Q_NET_IN, AIPlayer1::q_cache_in[0].data(), Q_NET_OUT, AIPlayer1::q_cache_out[0].data());
       fann_train_on_data(AIPlayer1::q_net, train_data, 10, 1, 1e-6);
       delete train_data;
