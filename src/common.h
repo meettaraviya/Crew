@@ -7,12 +7,19 @@
 #include <memory>
 #include <functional>
 
+#define V1
+
 #ifndef N
 #define N 5
 #endif
 #define T (N==3?13:(N==4?10:8))
 #define DIFF(a,b,c) (N==3?a:(N==4?b:c))
+#ifdef V1
+#define K 36
+#endif
+#ifndef V1
 #define K 93
+#endif
 #define N_GAMES 100
 
 

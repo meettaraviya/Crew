@@ -30,6 +30,7 @@ void const WonCardSetCountTask::print(){
 
 inline shared_ptr<Task> WON_CARD_SET_COUNT_TASK(auto a, auto b, auto c, auto d){ return shared_ptr<Task>(new WonCardSetCountTask(a,b,c,d));}
 
+#ifndef V1
 // NotOpenTrickTask
 
 NotOpenTrickTask::NotOpenTrickTask(int diff, CardSet s): Task{diff}, forbidden_cards(s){}
@@ -89,9 +90,56 @@ void const TrickWinnerConfigConditionTask::print(){
 }
 
 inline shared_ptr<Task> TRICK_WINNER_CONFIG_CONDITION_TASK(auto a, auto b, string c){ return shared_ptr<Task>(new TrickWinnerConfigConditionTask(a,b,c));}
+#endif
 
 // all_tasks
 
+#ifdef V1
+const shared_ptr<Task> all_tasks[] = {
+    WON_CARD_SET_COUNT_TASK(1, PINKS & ONES, 1, 1),
+    WON_CARD_SET_COUNT_TASK(1, PINKS & TWOS, 1, 1),
+    WON_CARD_SET_COUNT_TASK(1, PINKS & THREES, 1, 1),
+    WON_CARD_SET_COUNT_TASK(1, PINKS & FOURS, 1, 1),
+    WON_CARD_SET_COUNT_TASK(1, PINKS & FIVES, 1, 1),
+    WON_CARD_SET_COUNT_TASK(1, PINKS & SIXES, 1, 1),
+    WON_CARD_SET_COUNT_TASK(1, PINKS & SEVENS, 1, 1),
+    WON_CARD_SET_COUNT_TASK(1, PINKS & EIGHTS, 1, 1),
+    WON_CARD_SET_COUNT_TASK(1, PINKS & NINES, 1, 1),
+
+    WON_CARD_SET_COUNT_TASK(1, YELLOWS & ONES, 1, 1),
+    WON_CARD_SET_COUNT_TASK(1, YELLOWS & TWOS, 1, 1),
+    WON_CARD_SET_COUNT_TASK(1, YELLOWS & THREES, 1, 1),
+    WON_CARD_SET_COUNT_TASK(1, YELLOWS & FOURS, 1, 1),
+    WON_CARD_SET_COUNT_TASK(1, YELLOWS & FIVES, 1, 1),
+    WON_CARD_SET_COUNT_TASK(1, YELLOWS & SIXES, 1, 1),
+    WON_CARD_SET_COUNT_TASK(1, YELLOWS & SEVENS, 1, 1),
+    WON_CARD_SET_COUNT_TASK(1, YELLOWS & EIGHTS, 1, 1),
+    WON_CARD_SET_COUNT_TASK(1, YELLOWS & NINES, 1, 1),
+
+    WON_CARD_SET_COUNT_TASK(1, GREENS & ONES, 1, 1),
+    WON_CARD_SET_COUNT_TASK(1, GREENS & TWOS, 1, 1),
+    WON_CARD_SET_COUNT_TASK(1, GREENS & THREES, 1, 1),
+    WON_CARD_SET_COUNT_TASK(1, GREENS & FOURS, 1, 1),
+    WON_CARD_SET_COUNT_TASK(1, GREENS & FIVES, 1, 1),
+    WON_CARD_SET_COUNT_TASK(1, GREENS & SIXES, 1, 1),
+    WON_CARD_SET_COUNT_TASK(1, GREENS & SEVENS, 1, 1),
+    WON_CARD_SET_COUNT_TASK(1, GREENS & EIGHTS, 1, 1),
+    WON_CARD_SET_COUNT_TASK(1, GREENS & NINES, 1, 1),
+
+    WON_CARD_SET_COUNT_TASK(1, BLUES & ONES, 1, 1),
+    WON_CARD_SET_COUNT_TASK(1, BLUES & TWOS, 1, 1),
+    WON_CARD_SET_COUNT_TASK(1, BLUES & THREES, 1, 1),
+    WON_CARD_SET_COUNT_TASK(1, BLUES & FOURS, 1, 1),
+    WON_CARD_SET_COUNT_TASK(1, BLUES & FIVES, 1, 1),
+    WON_CARD_SET_COUNT_TASK(1, BLUES & SIXES, 1, 1),
+    WON_CARD_SET_COUNT_TASK(1, BLUES & SEVENS, 1, 1),
+    WON_CARD_SET_COUNT_TASK(1, BLUES & EIGHTS, 1, 1),
+    WON_CARD_SET_COUNT_TASK(1, BLUES & NINES, 1, 1),
+
+};
+#endif
+
+#ifndef V1
 const shared_ptr<Task> all_tasks[] = {
     WON_CARD_SET_COUNT_TASK(
         DIFF(3,3,3),
@@ -578,3 +626,5 @@ const shared_ptr<Task> all_tasks[] = {
     ),
 
 };
+
+#endif
